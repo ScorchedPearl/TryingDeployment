@@ -27,8 +27,8 @@ const Navbar = () => {
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="#features" className="nav-link text-white hover:text-cyan-200 transition-colors">Home</Link>
-            <Link href="#pricing" className="nav-link text-white hover:text-cyan-200 transition-colors">Features</Link>
+            <Link href="#home" className="nav-link text-white hover:text-cyan-200 transition-colors">Home</Link>
+            <Link href="#features" className="nav-link text-white hover:text-cyan-200 transition-colors">Features</Link>
             <Link href="#faq" className="nav-link text-white hover:text-cyan-200 transition-colors">FAQ</Link>
           </nav>
 

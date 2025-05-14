@@ -52,7 +52,8 @@ const Features = () => {
  };
 
   return (
-  <section className="py-20 relative bg-black/40 backdrop-blur-md">
+  <section className="py-20 relative bg-black/40 backdrop-blur-md"
+  id="features">
    <motion.div 
    initial="hidden"
    animate="visible"

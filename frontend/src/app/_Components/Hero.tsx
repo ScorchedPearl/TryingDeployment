@@ -66,6 +66,7 @@ const Hero = () => {
     <motion.section
       initial="hidden"
       animate="visible"
+      id='home'
       variants={containerVariants}
       className="pt-28 pb-20 overflow-hidden relative"
     >
