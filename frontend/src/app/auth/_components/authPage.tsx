@@ -21,7 +21,7 @@ export default function AuthPage() {
   } = useForm();
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [isOtpPage,setIsOtpPage ] = useState(false); 
-  const { useGoogleAuth,generateOTP,sendOTP,changePassword,signUp,signIn } = useUser();
+  const { googleAuth, generateOTP, sendOTP, changePassword, signUp, signIn } = useUser();
   async function waitForOtpVerification(checkInterval = 100, timeout = 30000) {
     return new Promise((resolve, reject) => {
       const interval = setInterval(() => {
@@ -82,11 +82,11 @@ export default function AuthPage() {
     redirect("/");
   };
   const googlelogin = useGoogleLogin({
-    onSuccess: async(cred: TokenResponse) => {
+    onSuccess: async (cred: TokenResponse) => {
       console.log(cred);
-       const token=await useGoogleAuth(cred.access_token)
-       localStorage.setItem('__Pearl_Token', token);
-       },
+      const token = await googleAuth(cred.access_token);
+      localStorage.setItem('__Pearl_Token', token);
+    },
     onError: () => console.log("Login Failed"),
     scope: "openid profile email",
   });

@@ -9,9 +9,9 @@ export interface User{
 interface UserContextType {
   currentUser: User | null;
   isLoading: boolean;
-  useGoogleAuth: (token: string)=> Promise<string>;
+  googleAuth: (token: string)=> Promise<string>;
   generateOTP: () => string;
-  sendOTP: (email: string) => Promise<AxiosResponse<any, any>>;
+  sendOTP: (email: string) => Promise<string>;
   changePassword: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string,name:string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
@@ -19,16 +19,16 @@ interface UserContextType {
 const UserContext = createContext<UserContextType>({
   currentUser: null,
   isLoading: true,
-  useGoogleAuth: ()=>{ return Promise.resolve("")},
+  googleAuth: ()=>{ return Promise.resolve("")},
   generateOTP: () => "",
-  sendOTP: async () => Promise.resolve({} as AxiosResponse<any, any>),
+  sendOTP: async () => Promise.resolve(""),
   changePassword: async () => Promise.resolve(),
   signUp: async () => Promise.resolve(),
   signIn: async () => Promise.resolve(),
 });
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { currentUser, isLoading } = useCurrentUser();
-  async function useGoogleAuth(token:string){
+  async function googleAuth(token:string){
     try {
       console.log("Google Auth Token: ", token);
 
@@ -53,7 +53,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         'Content-Type': 'application/json',
       },
     });
-    return response;
+    return response as unknown as string;
   }
   async function signUp(email: string, password: string,name:string) {
     const response = await axios.post(`http://localhost:8080/api/v1/auth/register`, {
@@ -69,7 +69,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         throw new Error('Failed to register')
       }
       const responseData = await response.data;
-      responseData.token && localStorage.setItem('__Pearl_Token', responseData.token);
+      if(responseData.token ){
+       localStorage.setItem('__Pearl_Token', responseData.token);
+      }
   }
   async function signIn(email: string, password: string) {
     const response = await axios.post(`http://localhost:8080/api/v1/auth/authenticate`, {
@@ -84,9 +86,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         throw new Error('Failed to authenticate')
        }
        const responseData=await response.data
-       responseData.token && localStorage.setItem('__Pearl_Token',responseData.token)
+       if(responseData.token ){
+       localStorage.setItem('__Pearl_Token',responseData.token)
+       }
   }
-  async function changePassword(email: string, password: string) {
+  async function changePassword() {
     // await graphqlClient.request(changePasswordMutation,changePasswordPayload);
     //       console.log("Password Changed");
     //       const token = await graphqlClient.request<TokendiffResponse>(
@@ -102,7 +106,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     //       }
   }
   return (
-    <UserContext.Provider value={{ currentUser, isLoading ,useGoogleAuth,generateOTP,sendOTP,changePassword,signUp,signIn}}>
+    <UserContext.Provider value={{ currentUser, isLoading ,googleAuth,generateOTP,sendOTP,changePassword,signUp,signIn}}>
       {children}
     </UserContext.Provider>
   );
