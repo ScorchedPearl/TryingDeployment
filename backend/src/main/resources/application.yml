@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db.slvrojnkfogdhveusxlz.supabase.co:5432/postgres
+    username: postgres
+    password: Password@123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: postgresql
+
