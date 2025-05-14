@@ -1,6 +1,6 @@
 import { createContext,useContext } from "react";
 import { useCurrentUser } from "@/hooks/useUser";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 export interface User{
   username: string;
   email: string;
