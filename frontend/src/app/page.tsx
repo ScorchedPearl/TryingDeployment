@@ -6,6 +6,7 @@ import { useCurrentUser } from "@/hooks/useUser";
 import ThreeJsBackground from "./_Components/ThreeBack";
 import Footer from "./_Components/Footer";
 import Navbar from "./_Components/NavBar";
+import Creator from "./_Components/creator";
 
 export default function Home(){
   const {currentUser,isLoading}=  useCurrentUser();
@@ -21,6 +22,7 @@ export default function Home(){
   <Navbar />
   <Hero></Hero>
   <Features></Features>
+  <Creator></Creator>
   <Footer />
   </>
  )
