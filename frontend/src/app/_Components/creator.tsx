@@ -144,7 +144,7 @@ export default function Creator() {
                       key={idx}
                       className="bg-[#1A1F2C] px-4 py-2 rounded-full flex items-center gap-2"
                     >
-                      <tech.icon className="w-5 h-5 text-[#9b87f5]" />
+                      <tech.icon className="w-5 h-5 text-cyan-500" />
                       <span>{tech.name}</span>
                     </div>
                   ))}
