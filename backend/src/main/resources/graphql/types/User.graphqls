@@ -1,0 +1,43 @@
+type User{
+    id: ID!
+    username: String!
+    marcelPearlId: String!
+    email: String!
+    streak: Int!
+    bio: String
+    profilePhoto: String
+    rank: String
+    badges: [String!]
+    role: Role!
+    submissions: [Submission!]
+    languages: [Language!]
+    solvedProblems: [Problem!]
+}
+
+enum Role {
+    USER
+    ADMIN
+}
+
+enum Difficulty {
+    Easy
+    Medium
+    Hard
+}
+
+type Submission{
+    id: ID!
+    problem: Problem
+    language: Language
+}
+
+type Language{
+    id: ID!
+    name: String!
+}
+
+type Problem{
+    id: ID!
+    statement: String!
+    difficulty: Difficulty!
+}
