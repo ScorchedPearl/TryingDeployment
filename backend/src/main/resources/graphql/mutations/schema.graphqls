@@ -1,0 +1,60 @@
+type Mutation{
+    signUp(input: SignUpInput!):AuthPayload!
+    signIn(input: SignInInput!):AuthPayload!
+    editProfile(input:EditProfileInput!):User!
+    otpVerification(request: OtpRequestInput!): Boolean!
+    forgotPassword(request: ForgotPasswordRequestInput!): String!
+    resetPassword(request: ResetPasswordRequestInput!): String!
+    googleAuth(token: String!): AuthPayload!
+}
+
+input SignUpInput{
+    name: String!
+    marcelPearlId: String!
+    email: String!
+    password: String!
+}
+
+input SignInInput{
+    marcelPearlId: String!
+    password: String!
+}
+
+input EditProfileInput{
+    name: String
+    marcelPearlId: String
+    email: String
+    bio: String
+    profilePhoto: String
+    currentPassword: String
+    newPassword: String
+}
+
+input OtpRequestInput {
+    email: String!
+    otp: String!
+}
+
+input ForgotPasswordRequestInput {
+    email: String!
+}
+
+input ResetPasswordRequestInput {
+    token: String!
+    newPassword: String!
+}
+
+type AuthPayload {
+    token: String!
+    user: SimpleUser!
+}
+
+type SimpleUser {
+    id: ID!
+    username: String!
+    marcelPearlId: String!
+    email: String!
+    role: Role!
+}
+
+

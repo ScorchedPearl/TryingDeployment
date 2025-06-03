@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://db.slvrojnkfogdhveusxlz.supabase.co:5432/postgres
-    username: postgres
-    password: Password@123
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: saumya
+    password: password
 
   jpa:
     hibernate:
@@ -10,3 +10,22 @@ spring:
     show-sql: true
     database: postgresql
 
+  graphql:
+    graphiql:
+      enabled: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: pearlautherizer@gmail.com
+    password: ${APP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+jwt:
+  secret: my-super-secret-jwt-key-1234567890
+  expiration: 604800000

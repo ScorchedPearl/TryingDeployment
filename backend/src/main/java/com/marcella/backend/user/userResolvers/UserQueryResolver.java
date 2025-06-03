@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -23,20 +24,13 @@ public class UserQueryResolver {
     @QueryMapping
     @PreAuthorize("isAuthenticated()")
     public User me(@AuthenticationPrincipal User currentUser) {
-        if (currentUser == null) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal())) {
-                return null;
-            }
-            String principalName = authentication.getName();
-            return userRepository.findByMarcelPearlId(principalName)
-                    .orElse(null);
-        }
-        return currentUser;
+        return userRepository.findByMarcelPearlId(currentUser.getMarcelPearlId())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
     @QueryMapping
+    @PreAuthorize("isAuthenticated()")
     public User userByMarcelPearlId(@Argument String marcelPearlId) {
         return userRepository.findByMarcelPearlId(marcelPearlId)
-                .orElse(null);
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + marcelPearlId));
     }
 }

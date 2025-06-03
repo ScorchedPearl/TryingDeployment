@@ -28,7 +28,7 @@ public class User implements UserDetails {
 
     @NotBlank(message = "Username is required")
     @Column(unique = true, nullable = false)
-    private String username;
+    private String name;
 
     @NotBlank(message = "UserId is required")
     @Column(unique = true, nullable = false)

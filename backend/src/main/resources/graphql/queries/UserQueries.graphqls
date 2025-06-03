@@ -1,4 +1,4 @@
 type Query{
     me: User
-    userByMarcelPearlId(marcelPearlId:String): User
+    userByMarcelPearlId(marcelPearlId:String!): User
 }

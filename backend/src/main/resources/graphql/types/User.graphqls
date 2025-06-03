@@ -1,6 +1,6 @@
 type User{
     id: ID!
-    username: String!
+    name: String!
     marcelPearlId: String!
     email: String!
     streak: Int!
