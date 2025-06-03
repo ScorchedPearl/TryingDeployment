@@ -51,7 +51,7 @@ type AuthPayload {
 
 type SimpleUser {
     id: ID!
-    username: String!
+    name: String!
     marcelPearlId: String!
     email: String!
     role: Role!

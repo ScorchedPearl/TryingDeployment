@@ -60,7 +60,6 @@ public class AuthService {
             }
             currentUser.setPassword(passwordEncoder.encode(input.getNewPassword()));
         }
-        System.out.println("done");
         return userRepository.save(currentUser);
     }
 
